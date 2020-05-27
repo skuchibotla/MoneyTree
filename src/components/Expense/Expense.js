@@ -65,61 +65,54 @@ const Expense = ({index, title, date, amount, expenseList, setExpenseList}) => {
             justify = "space-evenly"
             alignItems = "center"
           >
-            <Grid 
-              container
-              justify = "space-evenly"
-              wrap = "wrap"
-              item xs={4}
-            >
-              <TextField
-                label = "Edit Action"
-                value = {editTitle}
-                onChange = {(e) => {
-                  e.preventDefault();
-                  handleEditTitle(e.target.value);
-                }} 
-              />
-            </Grid>
-            <Grid 
-              container
-              justify = "space-evenly"
-              item xs={2} 
-            >
-              <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                <KeyboardDatePicker 
-                  autoOk
-                  variant = "inline"
-                  format = "MM/dd/yyyy"
-                  value = {editDate}
-                  InputAdornmentProps = {{ position: "start" }}
-                  onChange = {setEditDate}
-                  
+            <Grid item xs={10}>
+              <Grid 
+                container
+                direction = "row"
+                justify = "space-evenly"
+                alignItems = "flex-end"
+              >
+                <TextField
+                  label = "Edit Action"
+                  value = {editTitle}
+                  onChange = {(e) => {
+                    e.preventDefault();
+                    handleEditTitle(e.target.value);
+                  }} 
                 />
-              </MuiPickersUtilsProvider>
-            </Grid>
-            <Grid 
-              container
-              justify = "space-evenly"
-              item xs={2}
-            > 
-              <TextField 
-                type = "number"
-                value = {editAmount}
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">$</InputAdornment>
-                }}
-                style={{width: '60%'}}
-                onChange = {(e) => {
-                  e.preventDefault();
-                  handleEditAmount(e.target.value);
-                }} 
-              />
+            
+              <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                  <KeyboardDatePicker 
+                    autoOk
+                    variant = "inline"
+                    format = "MM/dd/yyyy"
+                    value = {editDate}
+                    InputAdornmentProps = {{ position: "start" }}
+                    onChange = {setEditDate}
+                    style={{width: '25%'}}
+                    
+                  />
+                </MuiPickersUtilsProvider>
+        
+                <TextField 
+                  type = "number"
+                  value = {editAmount}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">$</InputAdornment>
+                  }}
+                  style={{width: '12%'}}
+                  onChange = {(e) => {
+                    e.preventDefault();
+                    handleEditAmount(e.target.value);
+                  }} 
+                />
+              </Grid>
             </Grid>
             <Grid item xs={2}>
               <Grid
                 container
                 direction = "row"
-                justify = "center"
+                justify = "space-evenly"
                 alignItems = "center"
               >
                 <IconButton
@@ -144,7 +137,7 @@ const Expense = ({index, title, date, amount, expenseList, setExpenseList}) => {
         </div>
         :
         <div className={styles.expense}>
-          <Grid 
+          {/* <Grid 
             container
             direction = "row"
             justify = "space-evenly"
@@ -200,10 +193,59 @@ const Expense = ({index, title, date, amount, expenseList, setExpenseList}) => {
                 <DeleteOutlinedIcon />
               </IconButton>
             </Grid> 
+          </Grid> */}
+          <Grid 
+            container
+            direction = "row"
+            justify = "space-evenly"
+            alignItems = "center"
+          >
+            <Grid item xs={10}>
+              <Grid 
+                container
+                direction = "row"
+                justify = "space-evenly"
+                alignItems = "center"
+              >
+                <Typography variant = 'h6' style={{wordWrap: 'break-word', textAlign: 'center'}}>
+                  {title}
+                </Typography>
+            
+                <p>{(date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()}</p>
+        
+                <p>{amount}</p>
+              </Grid>
+            </Grid>
+            <Grid item xs={2}>
+              <Grid
+                container
+                direction = "row"
+                justify = "space-evenly"
+                alignItems = "center"
+              >
+                <IconButton
+                  onClick = {(e) => {
+                    e.preventDefault();
+                    handleEditExpense();
+                  }}
+                >
+                  <EditOutlinedIcon />
+                </IconButton>
+                <IconButton
+                  onClick = {(e) => {
+                    e.preventDefault();
+                    handleDeleteExpense(index);
+                  }}
+                >
+                  <DeleteOutlinedIcon />
+                </IconButton>
+              </Grid>
+            </Grid>
           </Grid>
         </div>
       }
-  </div>
-)}
+    </div>
+  );
+}
 
 export default Expense;

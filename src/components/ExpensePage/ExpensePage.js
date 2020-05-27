@@ -71,7 +71,7 @@ const ExpensePage = (props) => {
           justify = "center"
           alignItems = "center"
         >
-          <Grid item xs={8}>
+          <Grid item xs={10}>
             <Grid 
               container
               direction = "row"
@@ -113,11 +113,11 @@ const ExpensePage = (props) => {
               />
             </Grid>
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={2}>
             <Grid
               container
               direction = "row"
-              justify = "space-evenly"
+              justify = "center"
               alignItems = "center"
             >
               <IconButton
@@ -133,7 +133,7 @@ const ExpensePage = (props) => {
         </Grid>
       </div>
     </div>
-  )
+  );
 }
 
 export default ExpensePage;
