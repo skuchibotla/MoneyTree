@@ -13,7 +13,7 @@ const App = () => {
 
   const CustomAppBar = withStyles({
     root: {
-      background: 'linear-gradient(45deg, green, #7FFF7F)',
+      background: 'linear-gradient(45deg, green, #93FF93)',
     }
   })(AppBar);
 

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { addExpense } from '../../axios';
 import styles from './ExpensePage.module.css';
+
 import Expense from '../Expense/Expense';
 
 import Grid from '@material-ui/core/Grid';
@@ -10,12 +12,12 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/picker
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 
-const ExpensePage = (props) => {
+const ExpensePage = ({ pageId }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(new Date());
   const [amount, setAmount] = useState(0);
+  const [isExpenseAdded, setIsExpenseAdded] = useState(false);
   const [expenseList, setExpenseList] = useState([]);
-  const [addExpense, setAddExpense] = useState(false);
 
   const renderExpenses = () => {
     return (
@@ -23,7 +25,8 @@ const ExpensePage = (props) => {
       (expense, i) =>
       <Expense 
         key = {i}
-        index = {i}
+        id = {i}
+        pageId = {expense.pageId}
         title = {expense.title}
         date = {expense.date}
         amount = {expense.amount}
@@ -44,12 +47,17 @@ const ExpensePage = (props) => {
   const handleAddExpense = () => {
     if(title && date && amount) {
       const expenseListClone = [...expenseList];
-      expenseListClone.push({
+      const newExpense = {
+        id: expenseListClone.length,
+        pageId: pageId,
         title: title, 
         date: date,
         amount: amount
-      });
-      setAddExpense(true);
+      };
+      addExpense(newExpense);
+
+      expenseListClone.push(newExpense);
+      setIsExpenseAdded(true);
       setExpenseList(expenseListClone);
       setTitle("");
       setDate(new Date());
@@ -59,7 +67,7 @@ const ExpensePage = (props) => {
 
   return (
     <div>
-      {addExpense ? 
+      {isExpenseAdded ? 
         renderExpenses()
        : 
        <div />
