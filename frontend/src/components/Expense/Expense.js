@@ -151,7 +151,7 @@ const Expense = ({ id, pageId, title, date, amount, expenseList, setExpenseList 
             justify = "space-evenly"
             alignItems = "center"
           >
-            <Grid item xs={10}>
+            <Grid item xs={4}>
               <Grid 
                 container
                 direction = "row"
@@ -161,7 +161,25 @@ const Expense = ({ id, pageId, title, date, amount, expenseList, setExpenseList 
                 <Typography variant = 'h6' style={{wordWrap: 'break-word', textAlign: 'center'}}>
                   {title}
                 </Typography>
-                <p>{(date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()}</p>
+              </Grid>
+            </Grid>
+            <Grid item xs={3}>
+              <Grid 
+                  container
+                  direction = "row"
+                  justify = "space-evenly"
+                  alignItems = "center"
+                >
+                  <p>{(date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear()}</p>
+              </Grid>
+            </Grid>
+            <Grid item xs={3}>
+              <Grid 
+                  container
+                  direction = "row"
+                  justify = "space-evenly"
+                  alignItems = "center"
+                >
                 <p>{amount}</p>
               </Grid>
             </Grid>

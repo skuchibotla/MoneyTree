@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { addExpense } from '../../axios';
+import React, { useState, useEffect } from 'react';
+import { addExpense, getExpenses } from '../../axios';
 import styles from './ExpensePage.module.css';
 
 import Expense from '../Expense/Expense';
@@ -16,8 +16,26 @@ const ExpensePage = ({ pageId }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(new Date());
   const [amount, setAmount] = useState(0);
-  const [isExpenseAdded, setIsExpenseAdded] = useState(false);
   const [expenseList, setExpenseList] = useState([]);
+
+  useEffect(() => {
+    const expenseListClone = [];
+    getExpenses(pageId).then(val => {
+      val.map ((expense, i) => {
+        let tempDate = expense.Date;
+        tempDate = tempDate.replace('.000Z','');
+        const newExpense = {
+          id: expenseListClone.length,
+          pageId: pageId,
+          title: expense.Title, 
+          date: new Date(tempDate),
+          amount: expense.Amount
+        };
+        expenseListClone.push(newExpense);
+      });
+      setExpenseList(expenseListClone);
+    });
+  }, []);
 
   const renderExpenses = () => {
     return (
@@ -26,7 +44,7 @@ const ExpensePage = ({ pageId }) => {
       <Expense 
         key = {i}
         id = {i}
-        pageId = {expense.pageId}
+        pageId = {pageId}
         title = {expense.title}
         date = {expense.date}
         amount = {expense.amount}
@@ -55,9 +73,7 @@ const ExpensePage = ({ pageId }) => {
         amount: amount
       };
       addExpense(newExpense);
-
       expenseListClone.push(newExpense);
-      setIsExpenseAdded(true);
       setExpenseList(expenseListClone);
       setTitle("");
       setDate(new Date());
@@ -67,10 +83,11 @@ const ExpensePage = ({ pageId }) => {
 
   return (
     <div>
-      {isExpenseAdded ? 
+      {expenseList ? (
         renderExpenses()
-       : 
-       <div />
+      ) : (
+        <div>Loading...</div>
+      )
       }
       <div className = {styles.addExpense}>
         <Grid 

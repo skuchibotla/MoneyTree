@@ -50,6 +50,14 @@ app.delete('/deleteExpense/:id', (req, res) => {
         if (err) throw err;
         res.send(req.body);
     });
-})
+});
+
+app.get('/getExpenses/:pageId', (req, res) => {
+    let query = `SELECT Title, Date, Amount FROM MoneyTree.Expense WHERE PageID = "${req.params.pageId}"`;
+    connection.query(query, function(err, rows, fields) {
+        if (err) throw err;
+        res.send(rows);
+    });
+});
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
