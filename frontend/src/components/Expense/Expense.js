@@ -14,7 +14,7 @@ import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import CheckOutlinedIcon from '@material-ui/icons/CheckOutlined';
 import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined';
 
-const Expense = ({ id, pageId, title, date, amount, expenseList, setExpenseList }) => {
+const Expense = ({ id, pageId, title, date, amount, totalAmount, setTotalAmount, expenseList, setExpenseList }) => {
   const [editTitle, setEditTitle] = useState(title);
   const [editDate, setEditDate] = useState(date);
   const [editAmount, setEditAmount] = useState(amount);
@@ -41,6 +41,7 @@ const Expense = ({ id, pageId, title, date, amount, expenseList, setExpenseList 
   const handleUpdateExpense = (id) => {
     if(isUpdateExpense) {
       const expenseListClone = [...expenseList];
+      setTotalAmount(parseFloat(totalAmount) - parseFloat(expenseListClone[id].amount) + parseFloat(editAmount));
       const expense = {
         id: expenseListClone[id].id,
         pageId: expenseListClone[id].pageId,
@@ -58,7 +59,8 @@ const Expense = ({ id, pageId, title, date, amount, expenseList, setExpenseList 
 
   const handleDeleteExpense = (id) => {
     const expenseListClone = [...expenseList];
-    deleteExpense(id);
+    setTotalAmount(parseFloat(totalAmount) - parseFloat(expenseListClone[id].amount));
+    deleteExpense(expenseListClone[id]);
     expenseListClone.splice(id, 1);
     setExpenseList(expenseListClone);
   }
@@ -180,7 +182,7 @@ const Expense = ({ id, pageId, title, date, amount, expenseList, setExpenseList 
                   justify = "space-evenly"
                   alignItems = "center"
                 >
-                <p>{amount}</p>
+                <p>${amount}</p>
               </Grid>
             </Grid>
             <Grid item xs={2}>

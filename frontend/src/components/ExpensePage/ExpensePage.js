@@ -6,6 +6,7 @@ import Expense from '../Expense/Expense';
 
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
@@ -16,12 +17,14 @@ const ExpensePage = ({ pageId }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(new Date());
   const [amount, setAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
   const [expenseList, setExpenseList] = useState([]);
 
   useEffect(() => {
     const expenseListClone = [];
+    let totalAmountClone = 0;
     getExpenses(pageId).then(val => {
-      val.map ((expense, i) => {
+      val.forEach((expense, i) => {
         let tempDate = expense.Date;
         tempDate = tempDate.replace('.000Z','');
         const newExpense = {
@@ -32,10 +35,12 @@ const ExpensePage = ({ pageId }) => {
           amount: expense.Amount
         };
         expenseListClone.push(newExpense);
+        totalAmountClone += parseFloat(expense.Amount);
       });
       setExpenseList(expenseListClone);
+      setTotalAmount(totalAmountClone);
     });
-  }, []);
+  }, [pageId]);
 
   const renderExpenses = () => {
     return (
@@ -48,6 +53,8 @@ const ExpensePage = ({ pageId }) => {
         title = {expense.title}
         date = {expense.date}
         amount = {expense.amount}
+        totalAmount = {totalAmount}
+        setTotalAmount = {setTotalAmount}
         expenseList = {expenseList}
         setExpenseList = {setExpenseList}
       />
@@ -75,6 +82,8 @@ const ExpensePage = ({ pageId }) => {
       addExpense(newExpense);
       expenseListClone.push(newExpense);
       setExpenseList(expenseListClone);
+      setTotalAmount(parseFloat(totalAmount) + parseFloat(amount));
+
       setTitle("");
       setDate(new Date());
       setAmount(0);
@@ -86,7 +95,7 @@ const ExpensePage = ({ pageId }) => {
       {expenseList ? (
         renderExpenses()
       ) : (
-        <div>Loading...</div>
+        <div />
       )
       }
       <div className = {styles.addExpense}>
@@ -155,6 +164,25 @@ const ExpensePage = ({ pageId }) => {
               </IconButton>
             </Grid>
           </Grid>
+        </Grid>
+        <Grid
+          container
+          direction = "row"
+          justify = "flex-end"
+          alignItems = "center"
+          style = {{marginTop: '2%'}}
+          >
+            <Grid item xs={2}>
+                <Grid
+                  container
+                  direction = "row"
+                  justify = "space-evenly"
+                  alignItems = "flex-end">
+                    <Typography variant = 'h5' style = {{wordWrap: 'break-word', textAlign: 'center', fontWeight: '600'}}>
+                      ${totalAmount}
+                    </Typography>
+                </Grid>
+            </Grid>
         </Grid>
       </div>
     </div>
