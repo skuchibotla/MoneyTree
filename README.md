@@ -4,7 +4,7 @@
 * Technology stack: React.js, Express.js (framework of Node.js), and MySQL
 * Integrates Axios, a promise-based HTTP client for the browser and Node, to consume REST APIs made to the MySQL database
 
-\* 50/30/20 budget rule is a suggested budget of spending 50% of your income on necessities, 30% on desires, and 20% in savings.
+> \* 50/30/20 budget rule is a suggested budget of spending 50% of your income on necessities, 30% on desires, and 20% in savings.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
