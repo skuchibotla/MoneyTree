@@ -8,7 +8,7 @@
 
 **How to add expenses**
 
-![Recordit GIF](https://recordit.co/lSZ7TIqHtJ)
+![Recordit GIF](https://recordit.co/lSZ7TIqHtJ.gif)
 
 ## Available Scripts
 
