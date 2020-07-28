@@ -6,9 +6,19 @@
 
 > 50/30/20 budget rule is a suggested budget of spending 50% of your income on necessities, 30% on desires, and 20% in savings.
 
-**How to add expenses**
+## Demoes of current implementation
+
+### How to add expenses
 
 ![Recordit GIF](https://recordit.co/lSZ7TIqHtJ.gif)
+
+### How to edit expenses
+
+![Recordit GIF](https://recordit.co/C4icVOoweU.gif)
+
+### How to delete expenses
+
+![Recordit GIF](https://recordit.co/IO6ZMWpNuq.gif)
 
 ## Available Scripts
 
