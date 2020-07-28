@@ -6,7 +6,9 @@
 
 > 50/30/20 budget rule is a suggested budget of spending 50% of your income on necessities, 30% on desires, and 20% in savings.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**How to add expenses**
+
+![Recordit GIF](https://recordit.co/lSZ7TIqHtJ)
 
 ## Available Scripts
 
@@ -26,3 +28,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
+
+
+* This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
