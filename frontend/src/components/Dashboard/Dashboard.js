@@ -48,7 +48,7 @@ const Dashboard = () => {
 
   const CustomTab = withStyles({
     selected: {
-      color: 'green',
+      color: '#006A25',
     },
   })(Tab);
 
@@ -70,7 +70,7 @@ const Dashboard = () => {
             variant="fullWidth"
             aria-label="full width tabs example"
             TabIndicatorProps={
-              {style: {backgroundColor: 'green'}}
+              {style: {backgroundColor: '#006A25'}}
             }
           >
             <CustomTab label="Needs" {...a11yProps(0)} />
